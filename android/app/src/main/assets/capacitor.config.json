@@ -1,0 +1,8 @@
+{
+	"appId": "com.prasert.birthday",
+	"appName": "Birthday Wishes",
+	"webDir": "www",
+	"android": {
+		"allowMixedContent": true
+	}
+}

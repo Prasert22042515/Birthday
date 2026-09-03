@@ -2,7 +2,6 @@
   "appId": "com.prasert.birthday",
   "appName": "Birthday Wishes",
   "webDir": "www",
-  "bundledWebRuntime": false,
   "android": {
     "allowMixedContent": true
   }
