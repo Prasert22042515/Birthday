@@ -1,0 +1,19 @@
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Capacitor / Android build outputs
+android/app/build/
+android/build/
+android/.gradle/
+android/captures/
+android/.idea/
+*.apk
+*.aab
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp

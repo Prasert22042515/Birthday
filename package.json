@@ -1,0 +1,28 @@
+{
+  "name": "birthday",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sync": "npx cap sync android",
+    "build": "npx cap sync android"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Prasert22042515/Birthday.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Prasert22042515/Birthday/issues"
+  },
+  "homepage": "https://github.com/Prasert22042515/Birthday#readme",
+  "dependencies": {
+    "@capacitor/android": "^8.5.1",
+    "@capacitor/cli": "^8.5.1",
+    "@capacitor/core": "^8.5.1",
+    "canvas-confetti": "^1.9.4"
+  }
+}

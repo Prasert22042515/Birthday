@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <!-- • You can also change the page title: -->
+  <title>Happy Birthday! 🎉</title>
+  
+  <meta name="theme-color" content="#ff5e7e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Floating background balloons -->
+  <div class="balloon-container" aria-hidden="true" id="balloonContainer"></div>
+
+  <!-- Decorative floating stars/sparkles -->
+  <div class="sparkles-container" aria-hidden="true" id="sparklesContainer"></div>
+
+  <main class="app-container">
+    <header class="top-bar">
+      <button class="icon-btn" id="musicToggleBtn" title="Play Birthday Chime" aria-label="Play Birthday Chime">
+        <span class="icon">🎵</span>
+      </button>
+      <div class="badge">Special Day 🎂</div>
+      <button class="icon-btn" id="customizeToggleBtn" title="Customize Card" aria-label="Customize Card">
+        <span class="icon">✏️</span>
+      </button>
+    </header>
+
+    <div class="card glass-card">
+      <div class="card-glow"></div>
+      
+      <!-- Interactive Birthday Cake -->
+      <div class="cake-wrapper" id="cakeWrapper" title="Tap candle to blow out!">
+        <div class="cake">
+          <div class="plate"></div>
+          <div class="layer layer-bottom"></div>
+          <div class="layer layer-middle"></div>
+          <div class="layer layer-top"></div>
+          <div class="icing"></div>
+          <div class="drip drip1"></div>
+          <div class="drip drip2"></div>
+          <div class="drip drip3"></div>
+          <div class="candle">
+            <div class="flame" id="candleFlame"></div>
+            <div class="smoke" id="candleSmoke"></div>
+          </div>
+        </div>
+        <p class="candle-hint" id="candleHint">Tap the candle to make a wish! 🕯️</p>
+      </div>
+
+      <div class="greeting-content">
+        <span class="celebration-badge">✨ HAPPY BIRTHDAY ✨</span>
+        
+        <!-- • Change this line to the birthday person's name: -->
+        <h1 class="birthday-name" id="birthdayName">Alex</h1>
+
+        <!-- • And replace the paragraph with your own birthday message: -->
+        <p class="birthday-message" id="birthdayMessage">
+          Wishing you a day filled with boundless laughter, unforgettable memories, and all the happiness your heart can hold. May this year bring you closer to your biggest dreams! 🌟🎈
+        </p>
+      </div>
+
+      <!-- Action Buttons for Mobile -->
+      <div class="action-buttons">
+        <button class="btn btn-primary" id="confettiBtn">
+          <span>🎉 Celebrate & Confetti</span>
+        </button>
+        <button class="btn btn-secondary" id="giftBoxBtn">
+          <span>🎁 Open Surprise Gift</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Celebration Taps -->
+    <div class="reaction-bar">
+      <button class="reaction-btn" data-emoji="🎂">🎂</button>
+      <button class="reaction-btn" data-emoji="🎈">🎈</button>
+      <button class="reaction-btn" data-emoji="💖">💖</button>
+      <button class="reaction-btn" data-emoji="🥳">🥳</button>
+      <button class="reaction-btn" data-emoji="✨">✨</button>
+    </div>
+
+    <footer class="app-footer">
+      <p>Crafted with love for your special celebration 💕</p>
+    </footer>
+  </main>
+
+  <!-- In-app customization modal (Mobile friendly live editor) -->
+  <div class="modal-overlay" id="customizeModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Customize Birthday Card</h3>
+        <button class="close-btn" id="closeModalBtn" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <label for="inputName">Birthday Person's Name:</label>
+        <input type="text" id="inputName" placeholder="e.g. Alex" maxlength="30">
+
+        <label for="inputMessage">Birthday Message:</label>
+        <textarea id="inputMessage" rows="4" placeholder="Write your heartfelt message here..."></textarea>
+
+        <label for="inputTitle">Page Title:</label>
+        <input type="text" id="inputTitle" placeholder="e.g. Happy Birthday Alex! 🎉" maxlength="50">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="resetDefaultsBtn">Reset</button>
+        <button class="btn btn-primary" id="saveCustomizationBtn">Apply Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fullscreen Confetti Canvas -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Confetti library (offline bundled) -->
+  <script src="js/confetti.browser.min.js"></script>
+  <!-- Application Logic -->
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,542 @@
+/* ==========================================================================
+   Birthday Wishes Mobile App Styling
+   ========================================================================== */
+
+:root {
+  --primary: #ff477e;
+  --primary-hover: #ff2a66;
+  --secondary: #7928ca;
+  --secondary-hover: #6018a4;
+  --accent: #ffbe0b;
+  --bg-gradient-start: #ff758c;
+  --bg-gradient-end: #ff7eb3;
+  --card-bg: rgba(255, 255, 255, 0.88);
+  --card-border: rgba(255, 255, 255, 0.7);
+  --text-dark: #2d3748;
+  --text-muted: #5a6578;
+  --font-family-heading: 'Fredoka', cursive, sans-serif;
+  --font-family-body: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  font-family: var(--font-family-body);
+  background: linear-gradient(145deg, #ff758c 0%, #ff7eb3 40%, #7928ca 100%);
+  background-attachment: fixed;
+  color: var(--text-dark);
+  position: relative;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: calc(var(--safe-area-top) + 12px) 16px calc(var(--safe-area-bottom) + 16px);
+}
+
+/* Fullscreen Confetti Canvas */
+#confettiCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Floating Balloons Container */
+.balloon-container {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.balloon {
+  position: absolute;
+  bottom: -100px;
+  width: 44px;
+  height: 56px;
+  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+  opacity: 0.75;
+  animation: floatUp 12s linear infinite;
+}
+
+.balloon::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-120vh) rotate(20deg);
+    opacity: 0.1;
+  }
+}
+
+/* Main Container */
+.app-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0 auto;
+}
+
+/* Header / Top Bar */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+}
+
+.badge {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.icon-btn {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.icon-btn:active {
+  transform: scale(0.9);
+}
+
+.icon-btn.active {
+  background: #fff;
+  border-color: var(--primary);
+  animation: pulse 1s infinite alternate;
+}
+
+/* Glassmorphism Main Card */
+.glass-card {
+  position: relative;
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid var(--card-border);
+  border-radius: 28px;
+  padding: 24px 20px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+/* Cake Illustration */
+.cake-wrapper {
+  margin: 12px 0 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.cake {
+  position: relative;
+  width: 140px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.plate {
+  position: absolute;
+  bottom: 0;
+  width: 150px;
+  height: 12px;
+  background: #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.layer {
+  position: relative;
+  border-radius: 12px 12px 0 0;
+  box-shadow: inset 0 -3px rgba(0,0,0,0.08);
+}
+
+.layer-bottom {
+  width: 130px;
+  height: 38px;
+  background: #f8a5c2;
+  margin-bottom: 6px;
+  border-radius: 6px;
+}
+
+.layer-middle {
+  position: absolute;
+  bottom: 40px;
+  width: 105px;
+  height: 32px;
+  background: #f7d794;
+  border-radius: 6px;
+}
+
+.layer-top {
+  position: absolute;
+  bottom: 68px;
+  width: 80px;
+  height: 26px;
+  background: #f8a5c2;
+  border-radius: 6px;
+}
+
+.icing {
+  position: absolute;
+  bottom: 88px;
+  width: 84px;
+  height: 10px;
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+.candle {
+  position: absolute;
+  top: -12px;
+  width: 10px;
+  height: 24px;
+  background: repeating-linear-gradient(45deg, #ff477e, #ff477e 4px, #ffffff 4px, #ffffff 8px);
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  z-index: 5;
+}
+
+.flame {
+  position: absolute;
+  top: -16px;
+  width: 12px;
+  height: 18px;
+  background: radial-gradient(ellipse at 50% 60%, #fff 20%, #ffd000 60%, #ff4500 100%);
+  border-radius: 50% 50% 20% 20%;
+  animation: flicker 0.6s infinite alternate ease-in-out;
+  box-shadow: 0 0 16px #ffbe0b, 0 0 24px #ff5e7e;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.flame.extinguished {
+  opacity: 0;
+  transform: scale(0.2);
+  pointer-events: none;
+}
+
+.smoke {
+  position: absolute;
+  top: -24px;
+  width: 8px;
+  height: 12px;
+  background: rgba(180, 180, 180, 0.7);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.smoke.active {
+  animation: riseSmoke 1.2s forwards;
+}
+
+@keyframes flicker {
+  0% { transform: scale(1) rotate(-2deg); }
+  100% { transform: scale(1.15) rotate(3deg); }
+}
+
+@keyframes riseSmoke {
+  0% { opacity: 0.8; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-30px) scale(2.5); }
+}
+
+.candle-hint {
+  margin-top: 14px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--primary);
+  background: rgba(255, 71, 126, 0.12);
+  padding: 4px 10px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+/* Greeting Text Content */
+.greeting-content {
+  margin-top: 8px;
+  width: 100%;
+}
+
+.celebration-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--secondary);
+  background: rgba(121, 40, 202, 0.1);
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+}
+
+.birthday-name {
+  font-family: var(--font-family-heading);
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: #1a202c;
+  line-height: 1.2;
+  margin-bottom: 12px;
+  word-break: break-word;
+  background: linear-gradient(135deg, #ff477e 0%, #7928ca 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.birthday-message {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin: 0 auto 20px;
+  padding: 0 8px;
+  word-wrap: break-word;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.btn {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 16px;
+  font-family: var(--font-family-body);
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ff477e 0%, #ff758c 100%);
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(255, 71, 126, 0.4);
+}
+
+.btn-primary:active {
+  box-shadow: 0 4px 10px rgba(255, 71, 126, 0.3);
+}
+
+.btn-secondary {
+  background: rgba(121, 40, 202, 0.08);
+  color: var(--secondary);
+  border: 1.5px solid rgba(121, 40, 202, 0.2);
+}
+
+.btn-secondary:active {
+  background: rgba(121, 40, 202, 0.16);
+}
+
+/* Emoji Reaction Quick Bar */
+.reaction-bar {
+  display: flex;
+  justify-content: space-around;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  padding: 8px 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.reaction-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 12px;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.reaction-btn:active {
+  transform: scale(1.4);
+}
+
+/* Footer */
+.app-footer {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* In-App Customization Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 24px;
+  padding: 22px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  transform: scale(0.9);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-overlay.active .modal-card {
+  transform: scale(1);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.modal-header h3 {
+  font-family: var(--font-family-heading);
+  font-size: 1.25rem;
+  color: var(--text-dark);
+}
+
+.close-btn {
+  background: #f1f5f9;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #64748b;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-body label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.modal-body input,
+.modal-body textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  font-family: var(--font-family-body);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.modal-body input:focus,
+.modal-body textarea:focus {
+  border-color: var(--primary);
+}
+
+.modal-footer {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+/* Animations */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
