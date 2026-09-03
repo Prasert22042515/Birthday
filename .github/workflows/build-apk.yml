@@ -24,9 +24,6 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -42,10 +39,17 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x android/gradlew
 
+      - name: Accept Android SDK Licenses and Install Build Tools
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "build-tools;35.0.0" "platforms;android-35"
+
       - name: Build Android Debug APK
+        env:
+          ANDROID_SDK_ROOT: ${{ env.ANDROID_HOME }}
         run: |
           cd android
-          ./gradlew assembleDebug --stacktrace
+          ./gradlew assembleDebug --stacktrace --no-daemon
 
       - name: Verify and Prepare APK
         run: |
@@ -61,21 +65,21 @@ jobs:
 
       - name: Publish Debug APK to GitHub Releases
         uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/heads/main') || github.event_name == 'workflow_dispatch'
+        if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
         with:
           tag_name: v1.0.0
           name: "Birthday Wishes Mobile App v1.0.0 (Debug APK)"
           body: |
             ### 🎂 Birthday Wishes Mobile App (Debug APK)
-            
+
             This release contains the latest debug APK for the **Birthday Wishes** mobile app.
-            
+
             #### 📱 How to install on your Android device:
             1. Download `birthday-wishes-debug.apk` directly on your Android phone.
             2. Open the downloaded file.
             3. If prompted, enable **"Install from unknown sources"** or **"Allow from this source"**.
             4. Tap **Install** and open **Birthday Wishes**! 🎉
-            
+
             #### ✨ Features:
             - Full-screen festive confetti animations & emoji tap reactions
             - Interactive 3D birthday cake with realistic blow-out candle
